@@ -1,5 +1,8 @@
 package com.luckyframe.framework.shiro.service;
 
+import com.luckyframe.framework.ldap.ILdapPersonDao;
+import com.luckyframe.framework.ldap.Person;
+import com.luckyframe.project.system.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -39,6 +42,9 @@ public class LoginService
     
 	@Autowired
 	private IRoleProjectService roleProjectService;
+
+	@Autowired
+    private ILdapPersonDao ldapPersonDao;
 
     /**
      * 登录
@@ -86,6 +92,43 @@ public class LoginService
             user = userService.selectUserByEmail(username);
         }
 
+        if(user == null){
+            Person person = ldapPersonDao.checkUserPassword(username,password);
+            if(person!=null){
+                user = new User();
+                user.setLoginName(person.getUsername());
+                user.setUserType("02");
+                user.setEmail(person.getEmail());
+                user.setUserName(person.getRealname());
+                user.setPhonenumber(person.getTelephone());
+
+                user.setSalt("");
+                user.setPassword("");
+                user.setCreateBy("ldap");
+
+                userService.insertUser(user);
+                user = userService.selectUserByLoginName(username);
+            }
+        }
+        else{
+            if(user.getUserType().equals("02")){
+                Person person = ldapPersonDao.checkUserPassword(username,password);
+                if(person==null){
+                    throw new UserPasswordNotMatchException();
+                }
+
+                if(!person.getEmail().equals(user.getEmail()) ||
+                        !person.getRealname().equals(user.getUserName()) ||
+                        !person.getTelephone().equals(user.getPhonenumber())) {
+                    user.setEmail(person.getEmail());
+                    user.setUserName(person.getRealname());
+                    user.setPhonenumber(person.getTelephone());
+                    userService.updateUserInfo(user);
+                }
+
+            }
+        }
+
         if (user == null)
         {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.not.exists")));
@@ -104,7 +147,8 @@ public class LoginService
             throw new UserBlockedException();
         }
 
-        passwordService.validate(user, password);
+        if(!user.getUserType().equals("02"))
+            passwordService.validate(user, password);
         
         /*加入项目权限ID列表*/
         user.setProjectIdForRoles(roleProjectService.selectProjectPermsByUserId(user.getUserId()));

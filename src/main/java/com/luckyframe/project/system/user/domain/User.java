@@ -24,6 +24,9 @@ public class User extends BaseEntity
     @Excel(name = "用户序号")
     private Long userId;
 
+
+    private String userType;
+
     /** 部门ID */
     @Excel(name = "部门编号", type = Type.IMPORT)
     private Long deptId;
@@ -361,5 +364,13 @@ public class User extends BaseEntity
             .append("remark", getRemark())
             .append("dept", getDept())
             .toString();
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }

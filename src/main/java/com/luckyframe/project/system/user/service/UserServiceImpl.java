@@ -164,9 +164,12 @@ public class UserServiceImpl implements IUserService
     @Override
     public int insertUser(User user)
     {
-        user.randomSalt();
-        user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
-        user.setCreateBy(ShiroUtils.getLoginName());
+        if(user.getSalt() == null)
+            user.randomSalt();
+        if(user.getPassword() == null)
+            user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
+        if(user.getCreateBy() == null)
+            user.setCreateBy(ShiroUtils.getLoginName());
         // 新增用户信息
         int rows = userMapper.insertUser(user);
         // 新增用户岗位关联

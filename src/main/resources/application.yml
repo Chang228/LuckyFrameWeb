@@ -17,14 +17,26 @@ netty:
     # 编码格式
     encoder: UTF_8
     # 解码格式
-    decoder: GBK
+    decoder: UTF_8
+ldap:
+  enable: true
+  host: 192.168.254.4
+  port: 389
+  bindDn: cn=admin,dc=sinevasoft,dc=com
+  bindPassword: Sineva123
+  baseDn: ou=People,dc=sinevasoft,dc=com
+  filter: (&(objectClass=posixAccount))
+  idAttr: uid
+  nameAttr: cn
+  emailAttr: mail
+  phoneAttr: telephoneNumber
 # 开发环境配置
 server:
   # 服务端口
   port: 80
   servlet:
     # 项目contextPath
-    context-path: /
+    context-path: /autotest/
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
