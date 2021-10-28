@@ -222,6 +222,9 @@ public class UserServiceImpl implements IUserService
     @Override
     public int resetUserPwd(User user)
     {
+        if(user.getUserType().equals("02")){
+            throw new BusinessException("This is a LDAP User");
+        }
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         return updateUserInfo(user);
