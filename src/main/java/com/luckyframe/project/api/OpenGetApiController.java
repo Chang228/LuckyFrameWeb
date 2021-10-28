@@ -89,8 +89,8 @@ public class OpenGetApiController
 	public void clientGetCaseListByPlanId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer planId = Integer.valueOf(req.getParameter("planId"));
 
@@ -118,8 +118,8 @@ public class OpenGetApiController
 	public void clientGetServerVersion(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			pw.print("Version "+lfConfig.getVersion());
 		} catch (Exception e) {
@@ -138,8 +138,8 @@ public class OpenGetApiController
 	public void clientGetCaseListByPlanName(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			String planName = req.getParameter("planName");
 			ProjectPlan projectPlan= projectPlanService.selectProjectPlanByPlanName(planName);
@@ -169,8 +169,8 @@ public class OpenGetApiController
 	public void clientGetStepListByCaseId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer caseId = Integer.valueOf(req.getParameter("caseId"));
 
@@ -197,8 +197,8 @@ public class OpenGetApiController
 	public void clientGetTaskByTaskId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer taskId = Integer.valueOf(req.getParameter("taskId"));
 			TaskExecute taskExecute = taskExecuteService.selectTaskExecuteById(taskId);
@@ -220,8 +220,8 @@ public class OpenGetApiController
 	public void clientGetCaseByCaseId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer caseId = Integer.valueOf(req.getParameter("caseId"));
 			ProjectCase projectCase = projectCaseService.selectProjectCaseById(caseId);
@@ -243,8 +243,8 @@ public class OpenGetApiController
 	public void clientGetCaseByCaseSign(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			String caseSign = req.getParameter("caseSign");
 			ProjectCase projectCase = projectCaseService.selectProjectCaseByCaseSign(caseSign);
@@ -266,8 +266,8 @@ public class OpenGetApiController
 	public void clientGetParamsByProjectId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer projectId = Integer.valueOf(req.getParameter("projectId"));
 			List<ProjectCaseParams> projectCaseParamsList = projectCaseParamsService.selectProjectCaseParamsListByProjectId(projectId);
@@ -291,8 +291,8 @@ public class OpenGetApiController
 	public void clientGetTaskSchedulingByTaskId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer taskId = Integer.valueOf(req.getParameter("taskId"));
 			TaskExecute taskExecute = taskExecuteService.selectTaskExecuteById(taskId);
@@ -315,8 +315,8 @@ public class OpenGetApiController
 	public void clientGetCaseListForUnSucByTaskId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer taskId = Integer.valueOf(req.getParameter("taskId"));
 			List<TaskCaseExecute> taskCaseExecuteList= taskCaseExecuteService.selectTaskCaseExecuteListForUnSucByTaskId(taskId);
@@ -346,8 +346,8 @@ public class OpenGetApiController
 	public void clientGetProjectProtocolTemplateByTemplateId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer templateId = Integer.valueOf(req.getParameter("templateId"));
 			ProjectProtocolTemplate projectProtocolTemplate = projectProtocolTemplateService.selectProjectProtocolTemplateById(templateId);
@@ -369,8 +369,8 @@ public class OpenGetApiController
 	public void clientGetProjectTemplateParamsListByTemplateId(HttpServletRequest req, HttpServletResponse rsp) {
 		// 更新实体
 		try {
-			rsp.setContentType("text/html;charset=GBK");
-			req.setCharacterEncoding("GBK");
+			rsp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter pw = rsp.getWriter();
 			Integer templateId = Integer.valueOf(req.getParameter("templateId"));
 			ProjectTemplateParams projectTemplateParams = new ProjectTemplateParams();

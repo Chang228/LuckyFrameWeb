@@ -344,8 +344,8 @@ public class TaskSchedulingController extends BaseController
 	@RequestMapping(value = "/downloadLog.do")
 	public String downloadLog(ModelMap mmap, HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		response.setContentType("text/html;charset=gbk");
-		request.setCharacterEncoding("gbk");
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		String contentType = "application/octet-stream";
 		response.setContentType(contentType);
 		response.setContentType("multipart/form-data");
