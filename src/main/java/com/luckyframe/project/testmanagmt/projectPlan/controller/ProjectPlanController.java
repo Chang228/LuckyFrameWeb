@@ -2,6 +2,7 @@ package com.luckyframe.project.testmanagmt.projectPlan.controller;
 
 import java.util.List;
 
+import com.luckyframe.framework.web.service.DictService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,10 @@ public class ProjectPlanController extends BaseController
 	
 	@Autowired
 	private IProjectService projectService;
-	
+
+	@Autowired
+	private DictService dict;
+
 	@RequiresPermissions("testmanagmt:projectPlan:view")
 	@GetMapping()
 	public String projectPlan(ModelMap mmap)

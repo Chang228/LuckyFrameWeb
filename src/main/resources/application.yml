@@ -36,7 +36,7 @@ server:
   port: 80
   servlet:
     # 项目contextPath
-    context-path: /autotest/
+    context-path: /
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8

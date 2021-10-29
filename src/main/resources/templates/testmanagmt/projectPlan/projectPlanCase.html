@@ -145,19 +145,12 @@
 					title : '用例类型',
 					width : '10%',
 					class : 'myTDLengthHidden',
-		        	formatter: function (value, row, index) {
-		    		    if (row.caseType == 0) {
-		        			return 'HTTP接口';
-		        		} else if(row.caseType == 1){
-		        			return 'Web UI';
-		        		} else if(row.caseType == 2){
-		        			return 'API驱动';
-		        		} else if(row.caseType == 3){
-		        			return '移动端';
-		        		}else{
-		        			return '未知类型';
-		        		}
-		        	}
+					editable: {
+                        type: 'select',
+                        title: '用例类型',
+                        disabled: true,
+                        source: [[${@dict.getItem('testmanagmt_case_type')}]]
+                    }
 				},
 				{
 					field : 'failcontinue', 
