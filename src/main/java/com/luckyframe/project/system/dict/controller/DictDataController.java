@@ -130,22 +130,31 @@ public class DictDataController extends BaseController
 		try {
 			JSONObject json;
 			DictData dictData=new DictData();
-			if(stepType==0){
-				dictData.setDictType("testmanagmt_casestep_httpoperation");
-			}else if(stepType==1){
-				dictData.setDictType("testmanagmt_casestep_uioperation");
-			}else if(stepType==3){
-				dictData.setDictType("testmanagmt_casestep_muioperation");
+
+            dictData.setDictType("testmanagmt_case_step");
+            List<DictData> result = dictDataService.selectDictDataList(dictData);
+            DictData casestep = result.stream().filter(c->c.getDictValue().equals(stepType.toString())).findFirst().orElse(null);
+            if(casestep!=null){
+                dictData.setDictType(casestep.getDictLabel());
+//            }
+//			if(stepType==0){
+//				dictData.setDictType("testmanagmt_casestep_httpoperation");
+//			}else if(stepType==1){
+//				dictData.setDictType("testmanagmt_casestep_uioperation");
+//			}else if(stepType==3){
+//				dictData.setDictType("testmanagmt_casestep_muioperation");
 			}else{
 				dictData.setDictType("9999999999999999999999999999999999");
 			}
 			List<DictData> ddlist = dictDataService.selectDictDataList(dictData);
 			JSONArray jsonarr = new JSONArray();
 			for(DictData obdd:ddlist){
-				JSONObject jo = new JSONObject();
-                jo.put("name", obdd.getDictValue());
-                jo.put("description", obdd.getRemark());
-                jsonarr.add(jo);
+			    if(obdd.getStatus().equals("0")) {
+                    JSONObject jo = new JSONObject();
+                    jo.put("name", obdd.getDictValue());
+                    jo.put("description", obdd.getRemark());
+                    jsonarr.add(jo);
+                }
 			}
 			String recordJson = jsonarr.toString();
 					

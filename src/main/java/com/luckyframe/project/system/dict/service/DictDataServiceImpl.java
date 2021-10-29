@@ -44,6 +44,17 @@ public class DictDataServiceImpl implements IDictDataService
     }
 
     /**
+     * 根据字典类型查询字典数据
+     *
+     * @param dictType 字典类型
+     * @return 字典数据集合信息
+     */
+    @Override
+    public List<DictData> selectDictDataByTypeEnabled(String dictType)
+    {
+        return dictDataMapper.selectDictDataByTypeEnabled(dictType);
+    }
+    /**
      * 根据字典类型和字典键值查询字典数据信息
      * 
      * @param dictType 字典类型

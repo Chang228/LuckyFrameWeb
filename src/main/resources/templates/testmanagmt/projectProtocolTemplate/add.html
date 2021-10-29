@@ -19,6 +19,14 @@
 					<input id="templateName" name="templateName" class="form-control" type="text">
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">步骤类型：</label>
+				<div class="col-sm-8">
+					<select class="form-control" th:id="stepType" name="stepType" th:with="type=${@dict.getType('testmanagmt_case_type')}" >
+						<option th:field="*{stepType}" th:each="dict:${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" ></option>
+					</select>
+				</div>
+			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">消息头域：</label>
 				<div class="col-sm-8">

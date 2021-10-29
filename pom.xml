@@ -90,6 +90,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional> <!-- 表示依赖不会传递 -->
+			<scope>true</scope>
 		</dependency>
 
 		<!-- Mysql驱动包 -->
@@ -293,7 +294,11 @@
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 	<!--排除版本管理警告-->
 	<dependencyManagement>
 		<dependencies>

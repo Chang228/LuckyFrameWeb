@@ -109,6 +109,18 @@
 					class : 'myTDLengthHidden'
 				},
 				{
+					field : 'stepType',
+					title : '步骤类型',
+					sortable: true,
+					width: '5%',
+                    class: 'myTDLengthHidden',
+                    editable: {
+                        type: 'select',
+                        title: '用例类型',
+                        source: [[${@dict.getItem('testmanagmt_case_type')}]]
+                    }
+				},
+				{
 					field : 'templateName', 
 					title : '模板名称',
 					width : '20%',

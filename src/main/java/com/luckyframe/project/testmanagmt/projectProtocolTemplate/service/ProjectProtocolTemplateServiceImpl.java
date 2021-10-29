@@ -58,8 +58,20 @@ public class ProjectProtocolTemplateServiceImpl implements IProjectProtocolTempl
 	{
 	    return projectProtocolTemplateMapper.selectProjectProtocolTemplateList(projectProtocolTemplate);
 	}
-	
-    /**
+
+	/**
+	 * 查询协议模板管理列表
+	 *
+	 * @param projectProtocolTemplate 协议模板管理信息
+	 * @return 协议模板管理集合
+	 */
+	@Override
+	public List<ProjectProtocolTemplate> selectProjectProtocolTemplateListByStepType(ProjectProtocolTemplate projectProtocolTemplate)
+	{
+		return projectProtocolTemplateMapper.selectProjectProtocolTemplateListByStepType(projectProtocolTemplate);
+	}
+
+	/**
      * 新增协议模板管理
      * 
      * @param projectProtocolTemplate 协议模板管理信息

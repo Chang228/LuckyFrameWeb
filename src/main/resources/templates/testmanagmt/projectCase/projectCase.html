@@ -201,19 +201,7 @@
                     editable: {
                         type: 'select',
                         title: '用例类型',
-                        source: [{
-                            value: 0,
-                            text: "HTTP接口"
-                        }, {
-                            value: 1,
-                            text: "Web UI"
-                        }, {
-                            value: 2,
-                            text: "API驱动"
-                        }, {
-                            value: 3,
-                            text: "移动端"
-                        }]
+                        source: [[${@dict.getItem('testmanagmt_case_type')}]]
                     }
                 },
                 {
@@ -406,7 +394,8 @@
                                 return '预期结果不能为空';
                         }
                     }
-                }, {
+                },
+                {
                     field: 'stepType',
                     title: '步骤类型',
                     width: '5%',
@@ -414,21 +403,10 @@
                     editable: {
                         type: 'select',
                         title: '步骤类型',
-                        source: [{
-                            value: 0,
-                            text: "HTTP接口"
-                        }, {
-                            value: 1,
-                            text: "Web UI"
-                        }, {
-                            value: 2,
-                            text: "API驱动"
-                        }, {
-                            value: 3,
-                            text: "移动端"
-                        }]
+                        source: [[${@dict.getItem('testmanagmt_case_type')}]]
                     }
-                }, {
+                },
+                {
                     field: 'updateTime',
                     title: '更新时间',
                     width: '10%',

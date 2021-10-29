@@ -123,13 +123,7 @@
 					editable : {
 						type : 'text',
 						title : '参数值',
-						emptytext : "【参数值】为空",
-						validate : function(value) {
-							if (value.length > 500)
-								return '参数值不能超过500个字符';
-							if (value.length == 0)
-								return '参数值不能为空';
-						}
+						emptytext : "【参数值】为空"
 					}
 				},
 				{

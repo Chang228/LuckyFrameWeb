@@ -21,14 +21,21 @@ public interface ProjectProtocolTemplateMapper
      * @return 协议模板管理信息
      */
 	ProjectProtocolTemplate selectProjectProtocolTemplateById(Integer templateId);
-	
+
 	/**
-     * 查询协议模板管理列表
-     * 
-     * @param projectProtocolTemplate 协议模板管理信息
-     * @return 协议模板管理集合
-     */
+	 * 查询协议模板管理列表
+	 *
+	 * @param projectProtocolTemplate 协议模板管理信息
+	 * @return 协议模板管理集合
+	 */
 	List<ProjectProtocolTemplate> selectProjectProtocolTemplateList(ProjectProtocolTemplate projectProtocolTemplate);
+	/**
+	 * 查询协议模板管理列表
+	 *
+	 * @param projectProtocolTemplate 协议模板管理信息
+	 * @return 协议模板管理集合
+	 */
+	List<ProjectProtocolTemplate> selectProjectProtocolTemplateListByStepType(ProjectProtocolTemplate projectProtocolTemplate);
 	
 	/**
      * 新增协议模板管理

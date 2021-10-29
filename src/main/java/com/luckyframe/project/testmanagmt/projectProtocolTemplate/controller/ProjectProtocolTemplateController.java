@@ -2,6 +2,7 @@ package com.luckyframe.project.testmanagmt.projectProtocolTemplate.controller;
 
 import java.util.List;
 
+import com.luckyframe.framework.web.service.DictService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,10 @@ public class ProjectProtocolTemplateController extends BaseController
 	
 	@Autowired
 	private IProjectService projectService;
+
+
+	@Autowired
+	private DictService dict;
 	
 	@RequiresPermissions("testmanagmt:projectProtocolTemplate:view")
 	@GetMapping()
@@ -229,15 +234,16 @@ public class ProjectProtocolTemplateController extends BaseController
 	 * @author Seagull
 	 * @date 2019年3月12日
 	 */
-    @GetMapping("/getTemplateListByProjectId/{projectId}")
+    @GetMapping("/getTemplateListByProjectId/{projectId}/{stepType}")
     @ResponseBody
-	public String getTemplateListByProjectId(@PathVariable("projectId") Integer projectId) {
+	public String getTemplateListByProjectId(@PathVariable("projectId") Integer projectId, @PathVariable("stepType") Integer caseType) {
 		String str = "{\"message\": \"\",\"value\": ,\"code\": 200,\"redirect\": \"\" }";
 		try {
 			JSONObject json;
 			ProjectProtocolTemplate projectProtocolTemplate=new ProjectProtocolTemplate();
 			projectProtocolTemplate.setProjectId(projectId);
-			List<ProjectProtocolTemplate> ptlist = projectProtocolTemplateService.selectProjectProtocolTemplateList(projectProtocolTemplate);
+			projectProtocolTemplate.setStepType(caseType);
+			List<ProjectProtocolTemplate> ptlist = projectProtocolTemplateService.selectProjectProtocolTemplateListByStepType(projectProtocolTemplate);
 			JSONArray jsonarr = new JSONArray();
 			for(ProjectProtocolTemplate obppt:ptlist){
 				JSONObject jo = new JSONObject();

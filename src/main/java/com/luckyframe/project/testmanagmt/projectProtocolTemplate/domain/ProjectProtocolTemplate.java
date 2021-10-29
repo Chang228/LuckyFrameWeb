@@ -1,5 +1,6 @@
 package com.luckyframe.project.testmanagmt.projectProtocolTemplate.domain;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -18,6 +19,8 @@ public class ProjectProtocolTemplate extends BaseEntity
 	
 	/** 模板ID */
 	private Integer templateId;
+	/** 步骤类型 */
+	private Integer stepType;
 	/** 模板名称 */
 	private String templateName;
 	/** 项目ID */
@@ -74,7 +77,7 @@ public class ProjectProtocolTemplate extends BaseEntity
 	}
 	public void setHeadMsg(String headMsg) 
 	{
-		this.headMsg = headMsg;
+		this.headMsg = StringUtils.trim( headMsg);
 	}
 
 	public String getHeadMsg() 
@@ -146,4 +149,12 @@ public class ProjectProtocolTemplate extends BaseEntity
             .append("project", getProject())
             .toString();
     }
+
+	public Integer getStepType() {
+		return stepType;
+	}
+
+	public void setStepType(Integer stepType) {
+		this.stepType = stepType;
+	}
 }
