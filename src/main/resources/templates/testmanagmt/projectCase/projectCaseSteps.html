@@ -31,10 +31,10 @@
 							<input th:id="projectId+${iterStat.count}" name="projectId" type="hidden" th:value="${stepsOb.projectId}"/>
 							<label th:name="stepSerialNumber" th:id="stepSerialNumber+${iterStat.count}" th:value="${stepsOb.stepSerialNumber}" th:text="${stepsOb.stepSerialNumber}"></label>
 						</div></td>
-					<td width="18%">
+					<td width="12%">
 						<div class="col-sm-12 lf-td-div tooltip-show" data-toggle="tooltip" data-html="true" th:title="'<div align=&quot;left&quot; style=&quot;word-wrap:break-word&quot;>'+${stepsOb.stepPath}+'</div>'">
 							<input type="text" class="form-control" name="stepPath" th:id="stepPath+${iterStat.count}" th:value="${stepsOb.stepPath}" ondblclick="showPathModal(this)"/></div></td>
-					<td width="13%">
+					<td width="8%">
 						<div class="col-sm-12 lf-td-div tooltip-show" data-toggle="tooltip" data-html="true" th:title="'<div align=&quot;left&quot; style=&quot;word-wrap:break-word&quot;>'+${stepsOb.stepOperation}+'</div>'">
 							<input type="text" class="form-control" name="stepOperation" th:id="stepOperation+${iterStat.count}" th:value="${stepsOb.stepOperation}"/>
 							<div class="input-group-btn">
@@ -42,16 +42,17 @@
 							</div>
 						</div>
 					</td>
-					<td width="16%">
+					<td width="12%">
 						<div class="col-sm-12 lf-td-div tooltip-show" data-toggle="tooltip" data-html="true" th:title="'<div align=&quot;left&quot; style=&quot;word-wrap:break-word&quot;>'+${stepsOb.stepParameters}+'</div>'">
-							<input type="text" class="form-control" name="stepParameters" th:id="stepParameters+${iterStat.count}" th:value="${stepsOb.stepParameters}" ondblclick="showParamsModal(this)" /></div></td>
-					<td width="8%" th:title="${stepsOb.action}">
+							<textarea type="text" class="form-control" style="height: 34px" name="stepParameters" th:id="stepParameters+${iterStat.count}" th:text="${stepsOb.stepParameters}" ondblclick="showParamsModal(this)" ></textarea>
+						</div></td>
+					<td width="12%" th:title="${stepsOb.action}">
 						<div class="col-sm-12 lf-td-div tooltip-show" data-toggle="tooltip" data-html="true" th:title="'<div align=&quot;left&quot; style=&quot;word-wrap:break-word&quot;>'+${stepsOb.action}+'</div>'">
-							<input type="text" class="form-control" name="action" th:id="action+${iterStat.count}" th:value="${stepsOb.action}"/></div></td>
+							<textarea type="text" class="form-control" style="height: 34px" name="action" th:id="action+${iterStat.count}" th:text="${stepsOb.action}"  ondblclick="showActionModal(this)"></textarea></div></td>
 					<td width="12%">
 						<div class="col-sm-12 lf-td-div tooltip-show" data-toggle="tooltip" data-html="true" th:title="'<div align=&quot;left&quot; style=&quot;word-wrap:break-word&quot;>'+${stepsOb.expectedResult}+'</div>'">
 							<input type="text" class="form-control" name="expectedResult" th:id="expectedResult+${iterStat.count}" th:value="${stepsOb.expectedResult}"/></div></td>
-					<td width="10%">
+					<td width="5%">
 						<div class="col-sm-12 lf-td-div">
 							<select class="form-control" th:id="stepType+${iterStat.count}" name="stepType" th:with="type=${@dict.getType('testmanagmt_case_type')}" onChange="initSuggest(this)">
 								<option th:each="dict:${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:selected="${dict.dictValue==stepsOb.stepType.toString()}"></option>
@@ -85,7 +86,7 @@
 
 	<div class="row">
 		<div class="col-lg-4 text-center" style="width: 100%">
-			<button class="btn btn-info" id="debugButton" onclick="showDebugModal()" type="button" style="padding-left: 36px;padding-right: 36px;" th:if="${projectCase.caseType==0||projectCase.caseType==2}">调&nbsp;&nbsp;&nbsp;&nbsp;试</button>
+			<button class="btn btn-info" id="debugButton" onclick="showDebugModal()" type="button" style="padding-left: 36px;padding-right: 36px;" th:if="${projectCase.caseType==0||projectCase.caseType==2||projectCase.caseType>=100}">调&nbsp;&nbsp;&nbsp;&nbsp;试</button>
 		</div>
 	</div>
 
@@ -112,6 +113,26 @@
 	</div>
 </div>
 
+<div class="modal fade" id="actionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document"  style="width:70%">
+		<div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" id="myActionLabel">步骤动作</h4>
+			</div>
+			<div class="modal-body ibox-content">
+				<textarea class="form-control" id="actionArea" style="resize:none;width: 100%; height: 300px" rows="6" cols="20"></textarea>
+			</div>
+			<div class="modal-footer">
+				<label style="float:left;font-size: large;color: #ff0000"></label>
+				<label id="actionAlert" style="float:left;color: #ff0000">注意：点击确定暂存参数 > 右下角保存用例</label>
+				<button id="action-save" type="button" class="btn btn-primary">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="paramsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document"  style="width:70%">
 		<div class="modal-content" >
@@ -206,20 +227,43 @@
 		});
 		$("#paramsModal").modal('show');
 	}
-
 	$('#params-save').click(function () {
 		let modal = $('#paramsModal');
 		let paramsSource = $("#stepParameters" + id);
 		let params = modal.find('#paramsArea').val();
+		/*
 		if (params.length > 500) {
 			$("#paramsAlert").text("参数长度不能超过500！");
 		} else {
+		*/
 			$("#paramsAlert").text("注意：点击确定暂存参数 > 右下角保存用例");
 			paramsSource.val(params);
 			paramsSource.text(params);
 			modal.modal('hide');
-		}
+		/*}*/
 	});
+
+	function showActionModal(e) {
+		id = e.id.replace(/[^0-9]/ig, "");
+		$('#actionModal').on('show.bs.modal', function () {
+			let modal = $(this);
+			let actionSource = $("#action" + id);
+			modal.find('#actionArea').text(actionSource.val());
+			modal.find('#actionArea').val(actionSource.val());
+		});
+		$("#actionModal").modal('show');
+	}
+	$('#action-save').click(function () {
+		let modal = $('#actionModal');
+		let actionSource = $("#action" + id);
+		let action = modal.find('#actionArea').val();
+
+		$("#actionAlert").text("注意：点击确定暂存参数 > 右下角保存用例");
+		actionSource.val(action);
+		actionSource.text(action);
+		modal.modal('hide');
+	});
+
 
 	function showPathModal(e) {
 		id = e.id.replace(/[^0-9]/ig, "");
