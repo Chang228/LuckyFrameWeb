@@ -21,8 +21,7 @@ import java.util.List;
 @Component
 public class LdapPersonDao implements ILdapPersonDao {
 
-    @Autowired
-    private LdapConfig config;
+    private final LdapConfig config;
 
     private final LdapTemplate template;
     public LdapPersonDao(LdapConfig config){

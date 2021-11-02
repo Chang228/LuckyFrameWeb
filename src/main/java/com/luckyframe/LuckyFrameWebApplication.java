@@ -43,7 +43,7 @@ public class LuckyFrameWebApplication  implements CommandLineRunner
         log.info("服务端启动成功："+nettyConfig.getUrl()+":"+nettyConfig.getPort());
         server.start(address);
     }
-    
+
     public static void main(String[] args)
     {
         System.setProperty("spring.devtools.restart.enabled", "false");

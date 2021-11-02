@@ -353,11 +353,7 @@
                     editable: {
                         type: 'text',
                         title: '参数',
-                        emptytext: "【参数】为空",
-                        validate: function (value) {
-                            if (value.length > 500)
-                                return '参数不能超过500个字符';
-                        }
+                        emptytext: "【参数】为空"
                     }
                 }, {
                     field: 'action',
@@ -367,11 +363,7 @@
                     editable: {
                         type: 'text',
                         title: '步骤动作',
-                        emptytext: "【步骤动作】为空",
-                        validate: function (value) {
-                            if (value.length > 50)
-                                return '步骤动作不能超过50个字符';
-                        }
+                        emptytext: "【步骤动作】为空"
                     }
                 }, {
                     field: 'expectedResult',

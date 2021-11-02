@@ -86,6 +86,16 @@ spring:
       # 热部署开关
       enabled: true
 
+#  #Redis
+#  redis:
+#    host: 10.3.5.239
+#    port: 6379
+#
+#  session:
+#    store-type: redis
+#    redis:
+#      flush-mode: on_save
+#      namespace: spring:session
 # MyBatis
 mybatis:
     # 搜索指定包别名
