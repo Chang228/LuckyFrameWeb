@@ -129,7 +129,14 @@ public class OpenPostApiController
 		try {
 			TaskCaseExecute taskCaseExecute = JSONObject.parseObject(jsonObject.toJSONString(), TaskCaseExecute.class);
 			Integer caseStatus = taskCaseExecute.getCaseStatus();
-			TaskCaseExecute tce = taskCaseExecuteService.selectTaskCaseExecuteByTaskIdAndCaseId(taskCaseExecute);
+			TaskCaseExecute tce=null;
+			if(null==taskCaseExecute.getPlanId()) {
+				tce = taskCaseExecuteService.selectTaskCaseExecuteByTaskIdAndCaseId(taskCaseExecute);
+			}
+			else {
+				tce = taskCaseExecuteService.selectTaskCaseExecuteByTaskIdAndPlanIdAndCaseId(taskCaseExecute);
+			}
+
 			tce.setCaseStatus(caseStatus);
 			tce.setUpdateTime(new Date());
 			if(caseStatus==3){
@@ -146,7 +153,7 @@ public class OpenPostApiController
 			return "修改用例执行状态成功！";
 		}else{
 			return "修改用例执行状态失败！";
-		}		
+		}
 	}
 	
 	/**
@@ -290,7 +297,7 @@ public class OpenPostApiController
 			tce.setCaseId(projectCase.getCaseId());
 			TaskCaseExecute taskCaseExecute = taskCaseExecuteService.selectTaskCaseExecuteByTaskIdAndCaseId(tce);
 			
-			List<TaskCaseLog> loglist = taskCaseLogService.selectTaskCaseLogListByTaskCaseId(taskCaseExecute.getTaskCaseId());
+			List<TaskCaseLog> loglist = taskCaseLogService.selectTaskCaseLogListByTaskCaseId(taskCaseExecute.getTaskCaseId(),null);
 			for(TaskCaseLog tcl:loglist){
 				if(tcl.getLogDetail().contains("测试结果：")){
 					result = tcl.getLogDetail();

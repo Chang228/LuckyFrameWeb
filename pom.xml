@@ -5,7 +5,7 @@
 
 	<groupId>com.luckyframe</groupId>
 	<artifactId>LuckyFrameWeb</artifactId>
-	<version>3.4</version>
+	<version>3.5</version>
 	<packaging>jar</packaging>
 
 	<name>LuckyFrameWeb</name>
@@ -32,7 +32,7 @@
 		<commons.io.version>2.5</commons.io.version>
 		<commons.fileupload.version>1.3.3</commons.fileupload.version>
 		<bitwalker.version>1.19</bitwalker.version>
-		<lombok.version>1.16.18</lombok.version>
+<!--		<lombok.version>1.16.18</lombok.version>-->
 		<velocity.version>1.7</velocity.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<swagger.version>2.7.0</swagger.version>
